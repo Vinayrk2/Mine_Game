@@ -280,6 +280,8 @@
 			</optgroup>
 		</select>
 	</div>
+		
+	<a href="ScoreBoard.html" id="openScoreBoard" target="_blank"></a>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 	<script type="text/javascript">
@@ -312,6 +314,7 @@
 		window.onload = () => {
 			if (localStorage.getItem("highScore") != 0) {
 				document.getElementById("highScore").innerText = localStorage.getItem("highScore");
+				document.getElementById("openScoreBoard").click();
 			}
 		}
 
