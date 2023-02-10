@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title> Score Board Of Go Goast | DOOM.com</title>
+	<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@300&display=swap');
+
+		body{
+			background-image: url("https://earlygame.com/uploads/images/_body/The-Mortuary-Assistant-game.jpg");
+			background-size: cover;
+			font-family: 'Unbounded', cursive;
+		}
+
+		#logo{
+			position: absolute;
+			top: 0%;
+			left: 0.5%;
+			height: 60px;
+			width: 70px;
+		}
+
+		table{
+			background: black;
+		}
+		table td{
+			margin-left: 50%;
+			height: 40px;
+			width:300px;
+			font-size: 20px;
+			text-align: center;
+			color: white;
+		}
+
+		#scores{
+			margin-left: 5%;
+			margin-top: 10%;
+		}
+	</style>
+</head>
+<body>
+	<img id="logo" src="https://img.icons8.com/color/256/doom-logo.png" alt="DOOM.COM">
+
+<table id="scores" border="1"></table>
+
+<script type="text/javascript">
+
+	window.addEventListener("load",()=>{
+		const table = document.getElementById('scores');
+
+	let players = localStorage;
+
+	for (var i = 0; i < players.length-1; i++) {
+		var temp = table.insertRow(i);
+		var cell1 = temp.insertCell(0);
+		var cell2 = temp.insertCell(1);
+
+		cell1.innerHTML = "PLAYER ‎ ‎"+(i+1);
+		cell2.innerHTML = players["Player"+i];
+	}
+
+		var temp = table.insertRow();
+		var cell1 = temp.insertCell(0);
+		var cell2 = temp.insertCell(1);
+
+		cell1.innerHTML = "HIGH-SCORE";
+		cell2.innerHTML = players["highScore"];
+	});
+	
+</script>
+</body>
+</html>
