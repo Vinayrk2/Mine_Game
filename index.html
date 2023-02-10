@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://kit.fontawesome.com/c2a4c35825.js" crossorigin="anonymous"></script>
+	<title>
+		Go Goast | DOOM.com</title>
+	<style type="text/css">
+		@import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@300&display=swap');
+
+		* {
+			padding: 0;
+			margin: 0;
+		}
+
+		body {
+			font-family: 'Unbounded', cursive;
+			background-image: url("https://media.tenor.com/XaFiQU-NETsAAAAC/creepy-ghosts.gif");
+			background-color: gray;
+			background-blend-mode: multiply;
+			background-size: cover;
+		}
+
+		#container {
+			position: absolute;
+			left: 35%;
+			top: 15%;
+			height: 350px;
+			width: 350px;
+			padding: 10px;
+			border: none;
+			display: grid;
+			grid-template-columns: repeat(5, 1fr);
+			grid-template-rows: repeat(5, 1fr);
+			grid-gap: 8px;
+		}
+
+		.boxes {
+			background-color: rgb(201, 198, 198);
+			border: 1px solid rgba(41, 40, 40, 0.979);
+			font-size: 35px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		#input {
+			position: absolute;
+			color: white;
+			font-size: 20px;
+			text-shadow: 1px 1px 10px grey;
+			left: 24%;
+			top: 78%;
+			background-color: transparent;
+		}
+
+		#input div {
+			margin-top: 15px;
+			margin-left: 165px;
+			width: 350px;
+		}
+
+		#no_of_mines {
+			height: 35px;
+			color: white;
+			margin-top: 10px;
+			padding-left: 5px;
+			width: 350px;
+			font-size: 19px;
+			border: none;
+			background-image: url("https://imageresizer.static9.net.au/JW0aa78KcU8rY4XQC7_zPPn1g2o=/800x0/filters:format(webp):no_upscale()/https%3A%2F%2Fprod.static9.net.au%2F_%2Fmedia%2Fnetwork%2Futility%2Fquizzical%2F16%2F07%2F150716_itnewline_quiz.jpg");
+			background-size: cover;
+			box-shadow: 2px 2px 10px black;
+		}
+
+		#btn,
+		#restart {
+			width: 150px;
+			padding-left: 10px;
+			height: 35px;
+			font-size: 15px;
+			font-family: 'Unbounded', cursive;
+			border: none;
+			background-image: url("https://imageresizer.static9.net.au/JW0aa78KcU8rY4XQC7_zPPn1g2o=/800x0/filters:format(webp):no_upscale()/https%3A%2F%2Fprod.static9.net.au%2F_%2Fmedia%2Fnetwork%2Futility%2Fquizzical%2F16%2F07%2F150716_itnewline_quiz.jpg");
+			background-size: cover;
+			color: white;
+			letter-spacing: 1px;
+			transition: all 0.3s;
+			box-shadow: 2px 2px 10px black;
+		}
+
+		#restart:hover,
+		#btn:hover {
+			transform: scale(1.02);
+		}
+
+		#restart {
+			float: right;
+		}
+
+		#indication {
+			position: absolute;
+			top: 35%;
+			left: 28%;
+			display: none;
+		}
+
+		h1 {
+			font-size: 85px;
+		}
+
+		#score {
+			font-size: 30px;
+			margin-left: 15%;
+		}
+
+		.boxes i {
+			padding-top: 30px;
+			text-align: center;
+			height: 100%;
+			width: 100%;
+		}
+
+		#ScoreBoard {
+			width: 200px;
+			color: white;
+			padding: 20px 20px 20px 30px;
+			background-color: black;
+			box-shadow: 2px 2px 10px black;
+			position: absolute;
+			left: 77%;
+			top: 30%;
+		}
+
+		#highScore {
+			color: red;
+		}
+
+
+		#restart {
+			float: right;
+		}
+
+		#indicator {
+			height: auto;
+			width: 90%;
+			background-color: black;
+			color: white;
+			position: fixed;
+			left: 5%;
+			top: 42%;
+			box-shadow: 5px 5px 50px gray;
+			padding-top: 10px;
+			z-index: 1;
+			padding-bottom: 10px;
+			display: none;
+		}
+
+		#title,
+		CENTER {
+			padding-top: 10px;
+		}
+
+		#title {
+			width: 100%;
+			text-align: center;
+		}
+
+		#leftImage {
+			position: absolute;
+			left: 0px;
+			top: -210px;
+			z-index: 2;
+		}
+
+		#rightImage {
+			transform: rotateY(180deg);
+			position: absolute;
+			right: 0px;
+			top: -210px;
+			z-index: 2;
+		}
+
+		#logo{
+			position: absolute;
+			top: 0%;
+			left: 0.5%;
+			height: 60px;
+			width: 70px;
+		}
+
+		#player_count{
+			position: absolute;
+			letter-spacing: 1px;
+			display: flex;
+			color: white;
+			background-color: black;
+			box-shadow: 2px 2px 10px black;
+			padding: 8px 8px;
+			position: absolute;
+			left: 77%;
+			margin-top: 100px;
+			font-size: 20px;
+		}
+
+		#getPlayers {
+			/*			z-index: 3;*/
+			height: 100px;
+			margin-left: 500px;
+			margin-top: 30px;
+		}
+
+		#players {
+			width: 350px;
+			height: 30px;
+			text-align: center;
+			border: none;
+			color: white;
+			font-size: 17px;
+			background-image: url("https://imageresizer.static9.net.au/JW0aa78KcU8rY4XQC7_zPPn1g2o=/800x0/filters:format(webp):no_upscale()/https%3A%2F%2Fprod.static9.net.au%2F_%2Fmedia%2Fnetwork%2Futility%2Fquizzical%2F16%2F07%2F150716_itnewline_quiz.jpg");
+			background-size: cover;
+			font-family: 'Unbounded', cursive;
+			letter-spacing: 1px;
+			box-shadow: 2px 2px 10px black;
+		}
+
+		option,
+		optgroup {
+			background-color: rgb(20, 20, 20);
+		}
+	</style>
+</head>
+
+<body>
+	<img id="logo" src="https://img.icons8.com/color/256/doom-logo.png" alt="DOOM.COM">
+    <div id="player_count">PLAYER NO: ‎
+	<div id="turn" style="color:white"></div></div>
+	<div id="container"></div>
+
+	<div id="input">
+		Select Mines:-
+		<input type="tel" value="1" name="" id="no_of_mines" onkeyup="countMines()">
+		<div>
+			<button onclick="initGame()" id="btn"><b>Start Game</b></button>
+			<button onclick="window.location.assign(link)" id="restart"><b>Restart</b></button>
+		</div>
+	</div>
+
+	<div id="ScoreBoard">
+		SCORE : <span id="score">0</span><BR><BR><BR>
+		HIGH-SCORE : <span id="highScore">0</span>
+	</div>
+
+	<div id="indicator">
+		<img src="https://i.ibb.co/CMSRdnQ/png-transparent-gothic-fantasies-gothic-fashion-gothic-art-steampunk-gothic-black-hair-photography-f.png"
+			id="rightImage" height="300px" width="450px">
+		<img src="https://i.ibb.co/CMSRdnQ/png-transparent-gothic-fantasies-gothic-fashion-gothic-art-steampunk-gothic-black-hair-photography-f.png"
+			id="leftImage" height="300px" width="450px">
+
+		<h2 id="title"> GAME OVER </h2>
+		<center>
+			<H3 id="message"> BETTER LUCK NEXT TIME. </H3>
+		</center>
+		<CENTER>
+			<p> Score : <span id="finalScore"> </span> </p>
+		</CENTER>
+	</div>
+
+	<div id="getPlayers">
+		<select id="players" onchange="checkPlayers()">
+			<optgroup>
+				<option value="1"> 1‎ ‎ Player </option>
+				<option> 2‎ ‎ Players</option>
+				<option> 3‎ ‎ Players</option>
+				<option> 4‎ ‎ Players</option>
+				<option> 5‎ ‎ Players</option>
+				<option> 6‎ ‎ Players</option>
+			</optgroup>
+		</select>
+	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+	<script type="text/javascript">
+
+
+		const image1 = "https://i.ibb.co/GPZxH8j/png-clipart-daryl-dixon-halloween-horror-nights-maggie-greene-rick-grimes-the-walking-dead-season-4.png";
+		const image2 = "https://i.ibb.co/CMSRdnQ/png-transparent-gothic-fantasies-gothic-fashion-gothic-art-steampunk-gothic-black-hair-photography-f.png";
+		const img1 = document.getElementById("rightImage");
+		const img2 = document.getElementById("leftImage");
+		const title = document.getElementById("title");
+		const message = document.getElementById("message");
+		const indicator = document.getElementById("indicator");
+		const finalScore = document.getElementById("finalScore");
+		const container = document.getElementById('container');
+		let boxes = new Array(25);
+		let mineCount = document.getElementById("no_of_mines");
+		let mines = new Array(25);
+		const StartBtn = document.getElementById("btn");
+		let toWin;
+		const scoreBoard = document.getElementById("score");
+		let score = 0;
+		let scoreUpdator;
+		let playAgain = false;
+		let highScore = 0;
+		const link = window.location.href;
+		const turn = document.getElementById("turn");
+		let players, player_no = 0;
+		// console.log(link)
+
+		window.onload = () => {
+			if (localStorage.getItem("highScore") != 0) {
+				document.getElementById("highScore").innerText = localStorage.getItem("highScore");
+			}
+		}
+
+		// starts the game
+		function initGame() {
+			StartBtn.setAttribute("disabled", "true");
+			toWin = 25 - parseInt(mineCount.value);
+			scoreUpdator = 10;
+			score = 0;
+			scoreUpdator *= parseInt(mineCount.value);
+			mineCount.setAttribute("disabled", "true");
+			document.getElementById('players').style.display = "none";
+			container.style.backgroundColor = "black";
+			scoreBoard.innerText = score;
+			indicator.style.display = "none";
+			turn.innerText = player_no + 1;
+			console.log(player_no)
+			createGrid();
+			setBoxContent();
+			setEvent();
+			playAgain = true;
+		}
+		// gets the mines number 
+		function countMines() {
+			var a = mineCount.value;
+			if (a < 0 || a > 24) { StartBtn.disabled = "true"; console.log(" I : " + a) }
+			else { StartBtn.removeAttribute("disabled"); console.log(" E : " + a) }
+		}
+		// creates grid and adds boxes dynamically
+		function createGrid() {
+
+			if (playAgain == true) {
+				boxes.forEach(removeBoxes);
+			}
+			for (var i = 0; i < boxes.length; i++) {
+				boxes[i] = document.createElement("div");
+				boxes[i].setAttribute("class", "boxes");
+				boxes[i].innerHTML = `<i class="fa-solid fa-door-closed"></i>`;
+				container.appendChild(boxes[i]);
+			}
+		}
+		// used to set mines
+		var temp;
+		function setBoxContent() {
+
+			mineCount.value = mineCount.value == "" ? 1 : mineCount.value;
+
+			var checkPoint = false;
+
+			for (var i = 0; i < mineCount.value; i++) {
+
+
+				for (var j = 0; j < 25; j++) {
+					temp = parseInt((Math.random() * 100) % 25);
+
+
+					if (mines.indexOf(temp) == -1) {
+						mines[i] = temp;
+						break;
+					}
+				}
+				// console.log(mines[i])
+			}
+			// console.log(mines);
+		}
+
+		function checkRepeat(val) {
+			return val == temp;
+		}
+
+		function removeBoxes(val, index) {
+			container.removeChild(val);
+		}
+		/* This adds event listener to the boxes */
+		function setEvent() {
+			for (var i = boxes.length - 1; i >= 0; i--) {
+				boxes[i].addEventListener("click", revealTheBox);
+
+			}
+		}
+
+
+		/* reveal the box */
+		function revealTheBox(a) {
+
+			var flag = false;
+
+			a.target.parentNode.removeEventListener("click", revealTheBox);
+			for (var i = 0; i < mineCount.value; i++) {
+				if (mines[i] == boxes.indexOf(a.target.parentNode)) {
+
+					a.target.parentNode.style.backgroundColor = "#EE1515";
+					a.target.setAttribute("class", "fa-solid fa-ghost");
+					console.log("Game Over");
+					setIndicator(1);
+					boxes.forEach(function (val) { val.removeEventListener("click", revealTheBox) });
+					flag = true;
+					StartBtn.innerText = "Play Again";
+					localStorage.setItem("Player" + player_no, score);
+					player_no++;
+					player_no = player_no % parseInt(document.getElementById('players').value);
+					mineCount.removeAttribute("disabled");
+					StartBtn.removeAttribute("disabled");
+					setHighScore();
+					score = 0;
+				}
+			}
+			if (!flag) {
+				// console.log(a.target.parentNode)
+				a.target.setAttribute("class", "fa-solid fa-door-open");
+				console.log(score + " " + scoreUpdator)
+				score = score + scoreUpdator;
+				console.log(score)
+				scoreBoard.innerText = score;
+				toWin--;
+			}
+
+			checkForWin();
+		}
+		/* check for win */
+		function checkForWin() {
+			if (toWin == 0) {
+				score += 1000;
+				setHighScore();
+				// alert("You have won the match");
+				setIndicator(0);
+				mineCount.removeAttribute("disabled");
+				StartBtn.removeAttribute("disabled");
+			}
+			else
+				return;
+		}
+
+		function setHighScore() {
+			if (score > highScore) {
+				highScore = score;
+				localStorage.setItem("highScore", highScore);
+				console.log("score " + score)
+				document.getElementById("highScore").innerText = localStorage.getItem("highScore");
+			}
+		}
+
+		function setIndicator(check) {
+			indicator.style.zIndex = "1";
+			indicator.style.display = "block";
+
+			if (check == 1) {
+				title.innerText = " GAME OVER";
+				message.innerText = " BETTER LUCK NEXT TIME";
+				img1.setAttribute("src", image1);
+				img2.setAttribute("src", image1);
+				finalScore.innerText = score;
+			}
+			if (check == 0) {
+				title.innerText = " WINNER ";
+				message.innerText = " WELL PLAYED ! ! !";
+				img1.setAttribute("src", image2);
+				img2.setAttribute("src", image2);
+				finalScore.innerText = score;
+			}
+
+		}
+
+		function checkPlayers() {
+			localStorage.clear();
+
+			const players = document.getElementById('players');
+			var arr;
+
+			for (var i = 0; i < players.value; i++) {
+				localStorage.setItem("Player" + i, score);
+			}
+			localStorage.setItem("highScore", 0);
+		}
+	</script>
+</body>
+
+</html>
