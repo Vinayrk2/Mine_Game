@@ -25,5 +25,5 @@ Welcome to the Mine Game! This is a simple, yet exciting game built using HTML5,
 
 ## Play the Game
 
-[Click here to play the game](https://vinayrk2.github.io/mineGame.github.io/)
+[Click here to play the game](https://vinayrk2.github.io/Mine_Game/)
 
